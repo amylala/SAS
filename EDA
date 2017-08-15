@@ -1,0 +1,36 @@
+
+%macro Dist_Char(indata, byvar);
+proc freq data=&indata.;
+table &byvar. / missing out=&byvar.;
+run;
+%mend Dist_Char;
+
+
+%macro Dist_Num(indata, byvar);
+ods trace on /label;
+proc univariate data=&indata.;
+var &byvar.;
+output out=&byvar.
+min=min
+p10=p10
+p25=p25
+median =median
+mean =mean
+mode =mode 
+p75=p75
+p90=p90
+max=max
+;
+run;
+ods trace off;
+run;
+%mend Dist_ Num;
+
+/*Run the above code once*/
+
+/*Write new code below, using either %Dist_Char or %Dist_Num edited for your variables and dataset*/
+
+%Dist_Char(indata =, byvar=);
+
+%Dist_Num(indata =, byvar=);
+
